@@ -32,20 +32,21 @@ app.post('/send_email', async (req, res) => {
   });
 
   const mailOptions = {
-    from: email,
+    from: process.env.FROM_EMAIL, // sender address
     to: process.env.RECIPIENT_EMAIL,
     subject: 'New message from your portfolio site',
     text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`,
   };
-
   try {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ message: 'Error sending email' });
+    res.status(500).json({ message: 'Error sending email', error: error.message }); // Add error message to the response
   }
 });
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
