@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node -r dotenv/config index.js",
-    "dev": "nodemon -r dotenv/config index.js",
+    "start": "node -r dotenv/config Data/index.cjs",
+    "dev": "nodemon -r dotenv/config Data/index.cjs",
     "test": "node -r dotenv/config --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles"
   },
   "author": "",

@@ -8,20 +8,20 @@
 //   return pool.query(text, params);
 // }
 require('dotenv').config();
-import express, { json } from 'express';
-import { createTransport } from 'nodemailer';
-import cors from 'cors';
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(json());
+app.use(express.json());
 app.use(cors());
 
 app.post('/send_email', async (req, res) => {
   const { firstName, lastName, email, phone, message } = req.body;
 
-  const transporter = createTransport({
+  const transporter = nodemailer.createTransport({
     host: 'smtp.sendgrid.net',
     port: 587,
     secure: false,
